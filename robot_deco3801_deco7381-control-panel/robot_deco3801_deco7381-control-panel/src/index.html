@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LexiBot Control Panel</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+
+   <img id="video-stream" src="http:192.168.5.182:8000/stream.mjpg" alt="Live video">
+
+    <div class="control-panel">
+        <div class="controls">
+          <button class="up" onmousedown="startForward()" onmouseup="stopMovement()" onmouseleave="stopMovement()">⬆</button>
+          <button class="left" onmousedown="startLeft()" onmouseup="stopMovement()">⬅</button>
+          <button class="stop" onclick="sendCommand('stop')">⏹</button>
+          <button class="right" onmousedown="startRight()" onmouseup="stopMovement()">➡</button>
+          <button class="down" onmousedown="startBackward()" onmouseup="stopMovement()">⬇</button>
+        </div>
+
+        <div class="voice-control">
+          <img src="images/microphone.png" alt="Voice Input" class="mic-icon" onclick="startVoiceRecognition()">
+        </div>
+      </div>
+      
+      <div id="voice-loading" class="loading-popup">
+        <img src="images/voice.gif" alt="Listening..." class="loading-gif">
+        <p>Listening to you....</p>
+        <button onclick="stopVoiceRecognition()" class="stop-btn">Stop</button>
+    </div>
+    
+    <!-- Voice input pop-up window -->
+    <div id="voice-popup" class="popup">
+        <h2>Voice Input</h2>  
+        <textarea id="voice-input" placeholder="Please speak or enter text..."></textarea>
+        <button onclick="sendVoiceCommand()">Sent</button>
+        <button onclick="closeVoicePopup()">cancel</button>
+    </div>
+
+    <div id="sensorBox">
+      Front sensor: <span id="d1">--</span> m <br>
+      Rear sensor:&nbsp;<span id="d2">--</span> m
+    </div>
+    
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/sensor.js"></script>
+    <script src="js/send.js"></script>
+    <script src="js/voice_input.js"></script>
+    <script src="js/keyboard.js"></script>
+</body>
+</html>
